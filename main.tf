@@ -10,6 +10,9 @@ resource "azurerm_virtual_network" "MAIN" {
   address_space       = [var.VNET_CIDR]
   resource_group_name = var.RG_NAME
   location            = var.AZURE_LOCATION
+  depends_on = [
+    azurerm_resource_group.tcb-jrb-jump-challenge
+  ]
 }
 
 #Create Internal Subnet
@@ -37,6 +40,9 @@ resource "azurerm_public_ip" "bastion_ip" {
   location            = var.AZURE_LOCATION
   allocation_method   = "Static"
   sku = "Standard"
+  depends_on = [
+    azurerm_resource_group.tcb-jrb-jump-challenge
+  ]
 }
 
 #Bastion
